@@ -31,9 +31,9 @@ class MatchesController < ApplicationController
         @winner = Player.find(@match.winner_id)
         @loser = Player.find(@match.loser_id)
         
-        @winner.calculate_new_ranking(1, @loser)
-        @loser.calculate_new_ranking(0, @winner)
-        # format.html { redirect_to @match, notice: 'Match was successfully created.' }
+        @winner.calculate_new_rating(1, @loser)
+        @loser.calculate_new_rating(0, @winner)
+        format.html { redirect_to root_path, notice: 'Match was successfully created.' }
         # format.json { render :show, status: :created, location: @match }
       else
         format.html { render :new }

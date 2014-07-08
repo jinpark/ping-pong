@@ -7,10 +7,6 @@ class Player < ActiveRecord::Base
   has_many :lost_games, :class_name => 'Match', :foreign_key => 'loser_id'
   has_many :won_games, :class_name => 'Match', :foreign_key => 'winner_id'
 
-  include RankedModel
-  ranks :rating
-
-
   PRO_K_FACTOR = 10
   STARTER_K_FACTOR = 25
   DEFAULT_K_FACTOR = 15
@@ -34,6 +30,8 @@ class Player < ActiveRecord::Base
     new_rating = self.rating + k_value * (score - expected_outcome(opponent))
     self.rating = new_rating
     self.save
+
+    self.rating
   end
 
   def pro?
